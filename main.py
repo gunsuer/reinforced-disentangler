@@ -8,7 +8,6 @@
 # Import packages
 import argparse
 import numpy as np
-import matplotlib.pyplot as plt
 import pyclifford as pc
 import gymnasium as gym
 import stable_baselines3
