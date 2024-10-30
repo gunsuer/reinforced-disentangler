@@ -160,7 +160,9 @@ class Disentangler(gym.Env):
         if entropy == 0:
             m_per_layer = [np.sum(layer) for layer in self.theta]
             cost = [m_per_layer[i]*penalty(i,self.penalty_slope) for i in range(self.HALF_DEPTH)]
-            reward = self.positive_reward - np.sum(cost)#/(self.N_QUBITS*self.DEPTH)
+            penalty_list=[penalty(i,self.penalty_slope) for i in range(self.HALF_DEPTH)]
+            reward = 1 - sum(cost)/(self.N_QUBITS*sum(penalty_list))
+            #reward = self.positive_reward - np.sum(cost)/(self.N_QUBITS*self.DEPTH)
             done = True
         
         # Return the state, reward, done flag, truncate flag, and info
